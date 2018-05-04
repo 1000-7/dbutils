@@ -5,7 +5,9 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.*;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,12 +18,12 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * @Author unclewang
- * @Date 2018/5/4 09:59
+ * unclewang
+ * 2018/5/4 09:59
  * QueryRunner类、DBUtils类和Druid数据库连接池综合使用
  */
 public class DbUtilsDruid {
-    private static Logger logger = Logger.getLogger(DbUtilsDruid.class);
+    private static Logger logger = LoggerFactory.getLogger(DbUtilsDruid.class);
     private static DruidDataSource dds = null;
     private static DruidPooledConnection con = null;
     private static String filepath = "db.properties";
@@ -86,7 +88,7 @@ public class DbUtilsDruid {
         QueryRunner qr = new QueryRunner();
         try {
             row = qr.update(dpc, sql, param);
-            logger.info(row);
+            logger.info(String.valueOf(row));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -104,7 +106,7 @@ public class DbUtilsDruid {
         QueryRunner qr = new QueryRunner();
         try {
             row = qr.update(dpc, sql, param);
-            logger.info(row);
+            logger.info(String.valueOf(row));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -162,7 +164,6 @@ public class DbUtilsDruid {
                 Map<String, Object> map = (Map<String, Object>) qr.query(dpc, sql, rsh, param);
                 return map;
             }
-            logger.info(result);
         } catch (SQLException e) {
             e.printStackTrace();
         }
