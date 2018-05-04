@@ -111,6 +111,12 @@ public class DbUtilsDruid {
         return row;
     }
 
+    public Object query(String sql, ResultSetHandler rsh, String... param) {
+        DruidPooledConnection dpc = DbUtilsDruid.getInstance().getCon();
+        return this.query(dpc,sql,rsh,param);
+    }
+
+
     /**
      * 把如果修改了db.properties文件路径，则应该 先DbUtilsDruid.setFilepath("db_new.properties");
      * 连接则把dpc传进去
@@ -213,7 +219,7 @@ public class DbUtilsDruid {
         for (String oa : ids) {
             System.out.println(oa);
         }
-        
+
         //ScalarHandler测试
         long counts = (Long) dd.query(connection, "SELECT COUNT(*) FROM demo", new ScalarHandler());
         System.out.println("demo的个数：" + counts);
