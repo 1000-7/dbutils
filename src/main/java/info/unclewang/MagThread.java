@@ -168,11 +168,11 @@ public class MagThread implements Runnable {
     }
 
     public static void main(String[] args) {
-        MagThread mt1 = new MagThread(100064807, "expert1.txt");
-        MagThread mt2 = new MagThread(100124832, "expert2.txt");
-        MagThread mt3 = new MagThread(100184838, "expert3.txt");
-        MagThread mt4 = new MagThread(100244809, "expert4.txt");
-        MagThread mt5 = new MagThread(100304832, "expert5.txt");
+        MagThread mt1 = new MagThread(100073042, "expert1.txt");
+        MagThread mt2 = new MagThread(100133004, "expert2.txt");
+        MagThread mt3 = new MagThread(100193104, "expert3.txt");
+        MagThread mt4 = new MagThread(100253064, "expert4.txt");
+        MagThread mt5 = new MagThread(100313219, "expert5.txt");
 
         new Thread(mt1).start();
         new Thread(mt2).start();
