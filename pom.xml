@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>unclewang.info</groupId>
+    <groupId>info.unclewang</groupId>
     <artifactId>dbutils</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -20,15 +20,15 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/1000-7/dbutils</url>
-        <connection>https://github.com/1000-7/dbutils.git</connection>
-        <developerConnection>https://github.com/1000-7/dbutils</developerConnection>
+        <url>https://github.com/1000-7/expert_es</url>
+        <connection>https://github.com/1000-7/expert_es.git</connection>
+        <developerConnection>https://github.com/1000-7/expert_es</developerConnection>
     </scm>
     <developers>
         <developer>
             <name>wangxin</name>
             <email>x.wang@whu.edu.cn</email>
-            <url>https://github.com/1000-7/dbutils</url>
+            <url>https://github.com/1000-7/expert_es</url>
         </developer>
     </developers>
     <distributionManagement>
@@ -46,6 +46,8 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -67,5 +69,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
         </dependency>
-    </dependencies>>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.44</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -7,7 +7,6 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,14 +83,31 @@ public class DbUtilsDruid {
     /**
      * 如果db.properties文件放在默认的resources文件夹下，则用默认的crul方法
      */
-    public int crud(String sql, String... param) {
+    public int crud(String sql, Object... param) {
         int row = 0;
         DruidPooledConnection dpc = DbUtilsDruid.getInstance().getCon();
         QueryRunner qr = new QueryRunner();
         try {
             row = qr.update(dpc, sql, param);
-            logger.info(String.valueOf(row));
+//            logger.info(String.valueOf(row));
         } catch (SQLException e) {
+            return row;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return row;
+        }
+        return row;
+    }
+
+    public int crud(String sql, Object[][] param) {
+        int row = 0;
+        DruidPooledConnection dpc = DbUtilsDruid.getInstance().getCon();
+        QueryRunner qr = new QueryRunner();
+        try {
+            row = qr.batch(dpc, sql, param).length;
+//            logger.info(String.valueOf(row));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
         return row;
@@ -103,7 +119,7 @@ public class DbUtilsDruid {
      * DbUtilsDruid dd = DbUtilsDruid.getInstance();
      * Connection connection = dd.getCon();
      */
-    public int crud(Connection dpc, String sql, String... param) {
+    public int crud(Connection dpc, String sql, Object... param) {
         int row = 0;
         QueryRunner qr = new QueryRunner();
         try {
@@ -115,9 +131,9 @@ public class DbUtilsDruid {
         return row;
     }
 
-    public Object query(String sql, ResultSetHandler rsh, String... param) {
+    public Object query(String sql, ResultSetHandler rsh, Object... param) {
         DruidPooledConnection dpc = DbUtilsDruid.getInstance().getCon();
-        return this.query(dpc,sql,rsh,param);
+        return this.query(dpc, sql, rsh, param);
     }
 
 
@@ -127,8 +143,8 @@ public class DbUtilsDruid {
      * DbUtilsDruid dd = DbUtilsDruid.getInstance();
      * Connection connection = dd.getCon();
      */
-    public Object query(Connection dpc, String sql, ResultSetHandler rsh, String... param) {
-        Object result = null;
+    public Object query(Connection dpc, String sql, ResultSetHandler rsh, Object... param) {
+        Object result = "";
         QueryRunner qr = new QueryRunner();
         try {
 
@@ -169,7 +185,7 @@ public class DbUtilsDruid {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        logger.error("没有查到任何结果，有问题");
+//        logger.error("没有查到任何结果，有问题");
         return result;
     }
 
@@ -180,8 +196,10 @@ public class DbUtilsDruid {
         Connection connection = dd.getCon();
         //写删除的SQL语句
         String crudSql = "DELETE FROM demo_copy1";
+        //写插入的语句
+        String insertsql = "insert into demo values(?,?,?,?)";
         //测试crud
-        dd.crud(connection, crudSql);
+        dd.crud(connection, insertsql, "", "", "", "");
         //查询的SQL语句
         String querySql = "SELECT * From demo";
         //MapListHandler测试查询
